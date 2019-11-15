@@ -58,4 +58,20 @@ Kirby::plugin('flupe/kirby-cas', [
             ]
         ];
     },
+
+    'hooks' => [
+        'user.logout:after' => function ($user, $session) {
+            $kirby = App::instance();
+
+            phpCAS::client(
+                CAS_VERSION_2_0,
+                $kirby->option('flupe.kirby-cas.host'),
+                443,
+                $kirby->option('flupe.kirby-cas.context')
+            );
+
+            phpCAS::setNoCasServerValidation();
+            phpCAS::logoutWithRedirectService($kirby->url('panel'));
+        }
+    ],
 ]);
