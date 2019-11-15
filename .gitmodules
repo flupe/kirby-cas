@@ -1,0 +1,3 @@
+[submodule "phpCAS"]
+	path = phpCAS
+	url = https://github.com/apereo/phpCAS.git
